@@ -16,6 +16,10 @@ import java.util.Properties;
 @PropertySource("application.properties")
 public class AppConfig {
     @Bean
+    public PasswordEncoder encoder(){
+        return new BCryptPasswordEncoder();
+    }
+    @Bean
     public Cloudinary getCloudinary(@Value("${cloudinary.cloud_name}") String name,
                                     @Value("${cloudinary.api_key}") String key,
                                     @Value("${cloudinary.api_secret}") String secret){
@@ -53,8 +57,5 @@ public class AppConfig {
 //        return mailSender;
 //
 //    }
-    @Bean
-    public PasswordEncoder encoder(){
-        return new BCryptPasswordEncoder();
-    }
+
 }

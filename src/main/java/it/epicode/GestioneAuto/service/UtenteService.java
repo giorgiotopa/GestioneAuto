@@ -57,7 +57,8 @@ public class UtenteService {
     }
 
     public void deleteUtenteByUsername(String username) throws NotFoundException{
-        utenteRepository.deleteByUsername(username);
+        Utente u = getUtenteByUsername(username);
+        utenteRepository.delete(u);
     }
 
     public Utente uploadAvatar(int id, String url) throws NotFoundException{

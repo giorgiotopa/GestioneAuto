@@ -31,14 +31,14 @@ public class UtenteController {
     public ResponseEntity<CustomResponse> getAll(Pageable pageable){
         return CustomResponse.success(HttpStatus.OK.toString(), utenteService.gettAll(pageable), HttpStatus.OK);
     }
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<CustomResponse> getUtenteById(@PathVariable int id){
         return CustomResponse.success(HttpStatus.OK.toString(), utenteService.getUtenteById(id), HttpStatus.OK);
     }
-//    @GetMapping("/{username}")
-//    public ResponseEntity<CustomResponse> getUtenteByUsername(@PathVariable String username){
-//        return CustomResponse.success(HttpStatus.OK.toString(), utenteService.getUtenteByUsername(username), HttpStatus.OK);
-//    }
+    @GetMapping("/username/{username}")
+    public ResponseEntity<CustomResponse> getUtenteByUsername(@PathVariable String username){
+        return CustomResponse.success(HttpStatus.OK.toString(), utenteService.getUtenteByUsername(username), HttpStatus.OK);
+    }
 
     @PostMapping("")
     public ResponseEntity<CustomResponse> saveUtente(@RequestBody @Validated UtenteRequest utenteRequest, BindingResult bindingResult){
@@ -53,16 +53,16 @@ public class UtenteController {
     }
 
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/id/{id}")
     public ResponseEntity<CustomResponse> deleteUtenteById(@PathVariable int id){
         utenteService.deleteUtenteById(id);
         return CustomResponse.emptyResponse("L'utente con id = " + id + " è stato cancellato", HttpStatus.OK);
     }
-//    @DeleteMapping("/{username}")
-//    public ResponseEntity<CustomResponse> deleteUtenteByUsername(@PathVariable String username){
-//        utenteService.deleteUtenteByUsername(username);
-//        return CustomResponse.emptyResponse("L'utente con id = " + username + " è stato cancellato", HttpStatus.OK);
-//    }
+    @DeleteMapping("/username/{username}")
+    public ResponseEntity<CustomResponse> deleteUtenteByUsername(@PathVariable String username){
+        utenteService.deleteUtenteByUsername(username);
+        return CustomResponse.emptyResponse("L'utente con username = " + username + " è stato cancellato", HttpStatus.OK);
+    }
 
     @PatchMapping("/{id}/upload")
     public ResponseEntity<CustomResponse> uploadAvatar(@PathVariable int id,@RequestParam("upload") MultipartFile file){
