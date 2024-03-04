@@ -8,9 +8,9 @@ import lombok.Data;
 public class UtenteRequest {
 
     @NotBlank(message = "Campo obbligatorio")
-    public String nome;
+    private String nome;
     @NotBlank(message = "Campo obbligatorio")
-    public String cognome;
+    private String cognome;
     @Email(message = "Inserisci una email valida")
     private String email;
     @NotBlank(message = "Campo obbligatorio")

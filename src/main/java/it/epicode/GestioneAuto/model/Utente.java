@@ -19,8 +19,6 @@ public class Utente implements UserDetails {
     @SequenceGenerator(name = "utente_seq", sequenceName = "utente_sequence", allocationSize = 1)
     private int id;
 
-
-    @Enumerated(EnumType.STRING)
     private String nome;
     private String cognome;
     private String email;

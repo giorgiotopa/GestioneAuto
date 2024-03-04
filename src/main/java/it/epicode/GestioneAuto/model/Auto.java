@@ -26,8 +26,9 @@ public class Auto {
     private TipoAlimentazione tipoAlimentazione;
 
     private String descrizione;
-
     private double prezzo;
+
+    private String foto;
 
     @ManyToOne
     @JoinColumn(name = "utente_id")
