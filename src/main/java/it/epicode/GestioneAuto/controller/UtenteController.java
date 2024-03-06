@@ -3,6 +3,8 @@ package it.epicode.GestioneAuto.controller;
 import com.cloudinary.Cloudinary;
 import it.epicode.GestioneAuto.exception.BadRequestException;
 import it.epicode.GestioneAuto.exception.CustomResponse;
+import it.epicode.GestioneAuto.exception.NotFoundException;
+import it.epicode.GestioneAuto.model.Auto;
 import it.epicode.GestioneAuto.model.Utente;
 import it.epicode.GestioneAuto.request.UtenteRequest;
 import it.epicode.GestioneAuto.service.UtenteService;
@@ -18,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 @RestController
 @RequestMapping("/utenti")
@@ -29,7 +32,7 @@ public class UtenteController {
 
     @GetMapping("")
     public ResponseEntity<CustomResponse> getAll(Pageable pageable){
-        return CustomResponse.success(HttpStatus.OK.toString(), utenteService.gettAll(pageable), HttpStatus.OK);
+        return CustomResponse.success(HttpStatus.OK.toString(), utenteService.getAll(pageable), HttpStatus.OK);
     }
     @GetMapping("/id/{id}")
     public ResponseEntity<CustomResponse> getUtenteById(@PathVariable int id){
@@ -67,11 +70,22 @@ public class UtenteController {
     @PatchMapping("/{id}/upload")
     public ResponseEntity<CustomResponse> uploadAvatar(@PathVariable int id,@RequestParam("upload") MultipartFile file){
         try {
-            Utente d = utenteService.uploadAvatar(id, (String)cloudinary.uploader().upload(file.getBytes(), new HashMap()).get("url"));
-            return CustomResponse.success(HttpStatus.OK.toString(), d, HttpStatus.OK);
+            Utente utente = utenteService.uploadAvatar(id, (String)cloudinary.uploader().upload(file.getBytes(), new HashMap()).get("url"));
+            return CustomResponse.success(HttpStatus.OK.toString(), utente, HttpStatus.OK);
         }
         catch (IOException e){
             return CustomResponse.error(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+    @GetMapping("/{id}/auto")
+    public ResponseEntity<CustomResponse> getAutoByUtenteId(@PathVariable int id) {
+        try {
+            List<Auto> autoList = utenteService.getAutoByUtenteId(id);
+            return CustomResponse.success(HttpStatus.OK.toString(), autoList, HttpStatus.OK);
+        } catch (NotFoundException e) {
+            return CustomResponse.error(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
 

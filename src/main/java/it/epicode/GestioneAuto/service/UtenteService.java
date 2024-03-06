@@ -1,6 +1,7 @@
 package it.epicode.GestioneAuto.service;
 
 import it.epicode.GestioneAuto.exception.NotFoundException;
+import it.epicode.GestioneAuto.model.Auto;
 import it.epicode.GestioneAuto.model.Utente;
 import it.epicode.GestioneAuto.repository.UtenteRepository;
 import it.epicode.GestioneAuto.request.UtenteRequest;
@@ -10,6 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UtenteService {
 
@@ -18,7 +21,7 @@ public class UtenteService {
     @Autowired
     private PasswordEncoder encoder;
 
-    public Page<Utente> gettAll(Pageable pageable){
+    public Page<Utente> getAll(Pageable pageable){
         return  utenteRepository.findAll(pageable);
     }
     public Utente getUtenteById(int id) throws NotFoundException{
@@ -65,5 +68,9 @@ public class UtenteService {
         Utente u = getUtenteById(id);
         u.setAvatar(url);
         return utenteRepository.save(u);
+    }
+    public List<Auto> getAutoByUtenteId(int utenteId) throws NotFoundException {
+        Utente utente = getUtenteById(utenteId);
+        return utente.getListaAuto();
     }
 }
