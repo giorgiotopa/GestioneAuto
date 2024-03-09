@@ -14,6 +14,7 @@ import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +40,7 @@ public class AutoController {
     public ResponseEntity<CustomResponse> getAutoById(@PathVariable int id){
         return CustomResponse.success(HttpStatus.OK.toString(), autoService.getAutoById(id), HttpStatus.OK);
     }
-    @PostMapping("")
+    @PostMapping("/create")
     public ResponseEntity<CustomResponse> saveAuto(@RequestBody @Validated AutoRequest autoRequest, BindingResult bindingResult){
         if(bindingResult.hasErrors()) throw new BadRequestException(bindingResult.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList().toString());
         return CustomResponse.success(HttpStatus.OK.toString(), autoService.saveAuto(autoRequest), HttpStatus.OK);
