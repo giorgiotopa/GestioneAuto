@@ -47,11 +47,14 @@ public class AuthController {
         if(bindingResult.hasErrors()){
             throw new BadRequestException(bindingResult.getAllErrors().toString());
         }
-
         Utente utente = utenteService.getUtenteByUsername(loginRequest.getUsername());
         if(encoder.matches(loginRequest.getPassword(), utente.getPassword())){
             String token = jwtTools.createToken(utente);
-            return CustomResponse.emptyResponse(token, HttpStatus.ACCEPTED);
+
+            CustomResponse customResponse = new CustomResponse(token, utente);
+            return new ResponseEntity<>(customResponse, HttpStatus.ACCEPTED);
+
+//            return CustomResponse.emptyResponse(token, HttpStatus.ACCEPTED);
         }
         else{
             throw new LoginFaultException("Username/Password errate");
