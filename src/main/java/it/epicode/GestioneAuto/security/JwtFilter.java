@@ -57,7 +57,7 @@ public class JwtFilter extends OncePerRequestFilter {
 @Override
 protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
     String path = request.getServletPath();
-    return new AntPathMatcher().match("/auth/**", path) || new AntPathMatcher().match("/auto", path);
+    return new AntPathMatcher().match("/auth/**", path) || new AntPathMatcher().match("/auto/**", path);
 }
 
 
