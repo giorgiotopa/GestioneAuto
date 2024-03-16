@@ -49,7 +49,9 @@ public class UtenteService {
         u.setCognome(utenteRequest.getCognome());
         u.setEmail(utenteRequest.getEmail());
         u.setUsername(utenteRequest.getUsername());
-        u.setPassword(encoder.encode(utenteRequest.getPassword()));
+//        if (utenteRequest.getPassword() != null && !utenteRequest.getPassword().isEmpty()) {
+//            u.setPassword(encoder.encode(utenteRequest.getPassword()));
+//        }
 
         return utenteRepository.save(u);
     }

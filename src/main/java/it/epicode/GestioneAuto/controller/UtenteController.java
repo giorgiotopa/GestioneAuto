@@ -13,6 +13,7 @@ import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -54,8 +55,6 @@ public class UtenteController {
         if(bindingResult.hasErrors()) throw new BadRequestException(bindingResult.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList().toString());
         return CustomResponse.success(HttpStatus.OK.toString(), utenteService.updateUtente(id, utenteRequest), HttpStatus.OK);
     }
-
-
     @DeleteMapping("/id/{id}")
     public ResponseEntity<CustomResponse> deleteUtenteById(@PathVariable int id){
         utenteService.deleteUtenteById(id);
@@ -77,7 +76,6 @@ public class UtenteController {
             return CustomResponse.error(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
 
     @GetMapping("/{id}/auto")
     public ResponseEntity<CustomResponse> getAutoByUtenteId(@PathVariable int id) {
