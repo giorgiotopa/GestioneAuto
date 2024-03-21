@@ -24,6 +24,6 @@ public class AutoRequest {
     private String descrizione;
     @NotNull(message = "Prezzo required")
     private Double prezzo;
-    @NotNull(message = "Cliente required")
+    @NotNull(message = "Utente required")
     private Integer utenteId;
 }

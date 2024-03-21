@@ -58,7 +58,7 @@ public class AutoController {
     }
 
     @PatchMapping("/{id}/upload")
-    public ResponseEntity<CustomResponse> uploadAvatar(@PathVariable int id,@RequestParam("upload") MultipartFile file){
+    public ResponseEntity<CustomResponse> uploadFoto(@PathVariable int id,@RequestParam("upload") MultipartFile file){
         try {
             Auto auto = autoService.uploadFoto(id, (String)cloudinary.uploader().upload(file.getBytes(), new HashMap()).get("url"));
             return CustomResponse.success(HttpStatus.OK.toString(), auto, HttpStatus.OK);

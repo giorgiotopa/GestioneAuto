@@ -15,6 +15,6 @@ public class UtenteRequest {
     private String email;
     @NotBlank(message = "Campo obbligatorio")
     private String username;
-    @NotBlank(message = "Campo obbligatorio")
+//    @NotBlank(message = "Campo obbligatorio")
     private String password;
 }
