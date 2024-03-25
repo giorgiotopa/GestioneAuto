@@ -20,11 +20,16 @@ public class Utente implements UserDetails {
     private int id;
 
     private String nome;
+
     private String cognome;
+
     private String email;
+
     @Column(unique = true)
     private String username;
+
     private String password;
+
     private String avatar;
 
     @JsonIgnore

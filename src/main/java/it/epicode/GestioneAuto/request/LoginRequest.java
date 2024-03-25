@@ -8,6 +8,7 @@ public class LoginRequest {
 
     @NotBlank(message = "Username obbligatorio")
     private String username;
+    
     @NotBlank(message = "Password obbligatoria")
     private String password;
 

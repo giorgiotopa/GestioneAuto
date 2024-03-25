@@ -86,7 +86,4 @@ public class UtenteController {
             return CustomResponse.error(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
-
-
-
 }

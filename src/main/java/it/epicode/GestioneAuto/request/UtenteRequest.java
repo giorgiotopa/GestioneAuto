@@ -9,12 +9,15 @@ public class UtenteRequest {
 
     @NotBlank(message = "Campo obbligatorio")
     private String nome;
+
     @NotBlank(message = "Campo obbligatorio")
     private String cognome;
+
     @Email(message = "Inserisci una email valida")
     private String email;
+
     @NotBlank(message = "Campo obbligatorio")
     private String username;
-//    @NotBlank(message = "Campo obbligatorio")
+
     private String password;
 }

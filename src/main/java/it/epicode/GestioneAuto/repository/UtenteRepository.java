@@ -16,7 +16,4 @@ public interface UtenteRepository extends JpaRepository<Utente, Integer>, Paging
 
     public Optional<Utente> findByUsername(String username);
 
-//    @Query("SELECT u.listaAuto FROM Utente u WHERE u.id = :utenteId")
-//    List<Auto> findAutoByUtenteId(int utenteId);
-
 }

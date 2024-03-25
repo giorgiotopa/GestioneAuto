@@ -34,19 +34,20 @@ public class AuthController {
     public ResponseEntity<CustomResponse> register(@RequestBody @Validated UtenteRequest utenteRequest, BindingResult bindingResult){
 
         if(bindingResult.hasErrors()){
-
             throw new BadRequestException(bindingResult.getAllErrors().toString());
-
         }
+
         Utente user = utenteService.saveUtente(utenteRequest);
         return CustomResponse.success(HttpStatus.CREATED.toString(),user,HttpStatus.CREATED);
     }
 
     @PostMapping("/login")
     public ResponseEntity<CustomResponse> login(@RequestBody @Validated LoginRequest loginRequest, BindingResult bindingResult){
+
         if(bindingResult.hasErrors()){
             throw new BadRequestException(bindingResult.getAllErrors().toString());
         }
+
         Utente utente = utenteService.getUtenteByUsername(loginRequest.getUsername());
         if(encoder.matches(loginRequest.getPassword(), utente.getPassword())){
             String token = jwtTools.createToken(utente);
@@ -54,7 +55,6 @@ public class AuthController {
             CustomResponse customResponse = new CustomResponse(token, utente);
             return new ResponseEntity<>(customResponse, HttpStatus.ACCEPTED);
 
-//            return CustomResponse.emptyResponse(token, HttpStatus.ACCEPTED);
         }
         else{
             throw new LoginFaultException("Username/Password errate");

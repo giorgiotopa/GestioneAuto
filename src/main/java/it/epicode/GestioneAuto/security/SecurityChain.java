@@ -31,7 +31,6 @@ public class SecurityChain {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf(AbstractHttpConfigurer::disable);
-//        httpSecurity.cors(AbstractHttpConfigurer::disable);
         httpSecurity.cors(Customizer.withDefaults());
 
         httpSecurity.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

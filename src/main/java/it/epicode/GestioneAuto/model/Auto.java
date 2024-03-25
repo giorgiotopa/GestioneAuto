@@ -14,6 +14,7 @@ public class Auto {
     private int id;
 
     private String marca;
+
     private String modello;
 
     @Column(name = "anno_di_immatricolazione")
@@ -26,6 +27,7 @@ public class Auto {
     private TipoAlimentazione tipoAlimentazione;
 
     private String descrizione;
+
     private double prezzo;
 
     private String foto;
