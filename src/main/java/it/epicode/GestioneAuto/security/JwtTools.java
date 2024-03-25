@@ -24,7 +24,6 @@ public class JwtTools {
         return Jwts.builder().subject(utente.getUsername()).issuedAt(new Date(System.currentTimeMillis())).
                 expiration(new Date(System.currentTimeMillis()+Long.parseLong(expirationMs))).
                 signWith(Keys.hmacShaKeyFor(secret.getBytes())).compact();
-
     }
 
     public void validateToken(String token){
