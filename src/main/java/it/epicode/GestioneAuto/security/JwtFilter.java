@@ -60,6 +60,7 @@ protected boolean shouldNotFilter(HttpServletRequest request) throws ServletExce
     private void checkPathVariable(HttpServletRequest request, Utente utente){
         String[] parts = request.getServletPath().split("/");
         System.out.println(parts.length);
+
         Arrays.stream(parts).forEach(System.out::println);
         if(parts.length==3) {
             if (parts[1].equals("utenti")) {
